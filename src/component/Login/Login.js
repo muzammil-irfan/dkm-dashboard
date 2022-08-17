@@ -86,6 +86,21 @@ const Login = () => {
                   },
                 })}
               />
+              <input
+                type="Pin"
+                placeholder="Pin"
+                class="input input-bordered w-96 bg-white my-5 rounded-full"
+                {...register("Pin", {
+                  required: {
+                    value: true,
+                    message: "Pin is required",
+                  },
+                  minLength: {
+                    value: /^(\d{4}|\d{6})$/,
+                    message: "Minimum 6 characters required",
+                  },
+                })}
+              />
               <Link to="/dashboard">
               <input
                 type="submit"

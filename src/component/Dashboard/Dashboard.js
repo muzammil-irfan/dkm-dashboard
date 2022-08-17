@@ -2,9 +2,9 @@ import React from "react";
 import { FaChartPie } from "react-icons/fa";
 import { BsClipboardCheck } from "react-icons/bs";
 import { HiUserGroup, HiUsers } from "react-icons/hi";
-import { GrLocation } from "react-icons/gr";
+import { GoLocation } from "react-icons/go";
 import { AiOutlineSetting } from "react-icons/ai";
-import { Link, Outlet  } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import MainDashboard from "./MainDashboard/MainDashboard";
 import TallySheet from "./TallySheet/TallySheet";
 
@@ -13,8 +13,7 @@ const Dashboard = () => {
     <div class="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col p-5 bg-white">
-        
-        <Outlet/>
+        <Outlet />
 
         <label
           for="my-drawer-2"
@@ -26,28 +25,72 @@ const Dashboard = () => {
       <div class="drawer-side ">
         <label for="my-drawer-2" class="drawer-overlay"></label>
         <ul class="menu py-4 overflow-y-auto w-80 bg-[#313131] text-base-content">
-          <p className="font-bold text-center mt-5 mb-10 text-white">Admin Dashboard</p>
-          <p className="bg-red-500 m-0 p-5 text-white border-1">
-            <FaChartPie className="text-white inline-block relative bottom-[2px] mr-1" />
-            <Link to="/dashboard">  Main Dashboard </Link>
+          <p className="font-bold text-center mt-5 mb-10 text-white">
+            Admin Dashboard
           </p>
-          <p className="bg-red-500 m-0 p-5 text-white border-1">
-            <BsClipboardCheck className="text-white inline-block relative bottom-[2px] mr-1" />
-            <Link to="/dashboard/tally-sheet">  Tally Sheet </Link>
-          </p>
-          <p className="bg-red-500 m-0 p-5 text-white border-1">
+
+          <NavLink
+            to="/dashboard"
+            style={({ isActive }) =>
+              isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
+            }
+          >
+            <p className=" m-0 p-5 text-white border-1">
+              <FaChartPie className="text-white inline-block relative bottom-[2px] mr-1" />
+              Main Dashboard
+            </p>
+          </NavLink>
+          <NavLink
+            to="/dashboard/tally-sheet"
+            style={({ isActive }) =>
+              isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
+            }
+          >
+            <p className=" m-0 p-5 text-white border-1 ">
+              <BsClipboardCheck className="text-white inline-block relative bottom-[2px] mr-1" />
+              Tally Sheet
+            </p>
+            </NavLink>
+            <NavLink
+            to="/dashboard/tally-sheet"
+            style={({ isActive }) =>
+              isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
+            }
+          ></NavLink>
+          <NavLink
+            to="/"
+            style={({ isActive }) =>
+              isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
+            }
+          >
+          <p className=" m-0 p-5 text-white border-1">
             <HiUserGroup className="text-white inline-block relative bottom-[2px] mr-1" />
-            <Link to="/"> Users </Link>
+            Users 
           </p>
-          <p className="bg-red-500 m-0 p-5 text-white border-1">
-            <GrLocation className="text-white inline-block relative bottom-[2px] mr-1" />
-            <Link to="/"> Locations </Link>
+          </NavLink>
+          <NavLink
+            to="/"
+            style={({ isActive }) =>
+              isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
+            }
+          >
+          <p className=" m-0 p-5 text-white border-1">
+            <GoLocation className="text-white inline-block relative bottom-[2px] mr-1" />
+            Locations 
           </p>
-          <p className="bg-red-500 m-0 p-5 text-white border-1">
+          </NavLink>
+          <NavLink
+            to="/dashboard/customers"
+            style={({ isActive }) =>
+              isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
+            }
+          >
+          <p className=" m-0 p-5 text-white border-1">
             <HiUsers className="text-white inline-block relative bottom-[2px] mr-1" />
-            <Link to="/dashboard/customers"> Customer </Link>
+             Customer 
           </p>
-          <div class="dropdown bg-red-500 m-0 p-5 text-white">
+          </NavLink>
+          <div class="dropdown  m-0 p-5 text-white">
             <label tabindex="0" class=" m-1">
               <AiOutlineSetting className="text-white inline-block relative bottom-[2px] mr-1" />
               Click

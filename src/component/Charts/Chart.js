@@ -52,8 +52,8 @@ export default function App() {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
+      <XAxis dataKey="name" domain={[0, 'dataMax + 100']}/>
+      <YAxis type="number"  />
       <Bar barSize={20} dataKey="uv" fill="#8AA67F" />
     </BarChart>
   );

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const Customers = () => {
-  return (
-    <div>
+const Location = () => {
+    return (
+        <div>
       <div className="flex justify-between items-center">
-        <h1 className="text-xl text-black font-bold">Customers</h1>
+        <h1 className="text-xl text-black font-bold">Locations</h1>
         <label for="my-modal-3" class="btn modal-button btn-warning">open modal</label>
         {/* modal  */}
         <input type="checkbox" id="my-modal-3" class="modal-toggle" />
@@ -58,7 +58,7 @@ const Customers = () => {
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default Customers;
+export default Location;

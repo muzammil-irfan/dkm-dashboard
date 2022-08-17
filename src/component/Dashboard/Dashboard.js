@@ -58,7 +58,7 @@ const Dashboard = () => {
             }
           ></NavLink>
           <NavLink
-            to="/"
+            to="/dashboard/users"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }
@@ -69,7 +69,7 @@ const Dashboard = () => {
           </p>
           </NavLink>
           <NavLink
-            to="/"
+            to="/dashboard/location"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }

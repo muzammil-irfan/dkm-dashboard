@@ -30,7 +30,7 @@ const Dashboard = () => {
           </p>
 
           <NavLink
-            to="/dashboard"
+            to="/dashboard/mainDB"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }

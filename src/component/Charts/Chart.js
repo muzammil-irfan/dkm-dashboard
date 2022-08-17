@@ -41,20 +41,20 @@ const data = [
 export default function App() {
   return (
     <BarChart
-      width={890}
+      width={930}
       height={400}
       data={data}
       margin={{
         top: 5,
-        right: 30,
-        left: 20,
+        right: 0,
+        left: 0,
         bottom: 5
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" domain={[0, 'dataMax + 100']}/>
       <YAxis type="number"  />
-      <Bar barSize={20} dataKey="uv" fill="#8AA67F" />
+      <Bar barSize={30} dataKey="uv" fill="#8AA67F" />
     </BarChart>
   );
 }

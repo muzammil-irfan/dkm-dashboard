@@ -17,8 +17,8 @@ const TallySheet = () => {
           <h1 className="text-3xl text-black font-bold">60</h1>
         </div>
       </div>
-      <div className=" px-7 py-10  shadow-lg bg-slate-50">
-        <div class=" tallyGrid">
+      <div className=" px-5 py-10  shadow-lg bg-slate-50">
+        <div class=" tallyGrid text-[10px]">
           <div>
             <p className="">Date</p>
             <p className="">6/5/2022</p>
@@ -31,9 +31,9 @@ const TallySheet = () => {
             <p className="">DKM Num</p>
             <p className="">1234</p>
           </div>
-          <div>
+          <div className="mr-1">
             <p className="">Ship To</p>
-            <p className="">DKM Little Rock</p>
+            <p className="mr-1">DKM Little Rock</p>
           </div>
           <div>
             <p className="">Location</p>
@@ -68,7 +68,7 @@ const TallySheet = () => {
             <p className="">3</p>
           </div>
           <div>
-            <p className=" mx-2">Driver</p>
+            <p className="">Driver</p>
             <p className="">Truck Com</p>
           </div>
         </div>

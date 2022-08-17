@@ -7,7 +7,7 @@ const Customers = () => {
     <div>
       <div className="flex justify-between items-center">
         <h1 className="text-xl text-black font-bold">Customers</h1>
-        <label for="my-modal-3" class="btn modal-button btn-warning">open modal</label>
+        <label for="my-modal-3" class="btn modal-button btn-warning">Add New</label>
         {/* modal  */}
         <input type="checkbox" id="my-modal-3" class="modal-toggle" />
         <div class="modal">

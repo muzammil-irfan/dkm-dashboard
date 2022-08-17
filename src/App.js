@@ -18,7 +18,7 @@ function App() {
       <Route path="/changePass" element={<ChangePassword/>} />
       <Route path="/changePin" element={<ChangePin/>} />
       <Route path="/dashboard" element={<Dashboard/>}>
-      <Route index element={<MainDashboard/>} />
+      <Route index path="mainDB" element={<MainDashboard/>} />
       <Route path="customers" element={<Customers/>} />
       <Route path="users" element={<Users/>} />
       <Route path="location" element={<Location/>} />

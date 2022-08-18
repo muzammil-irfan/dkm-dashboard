@@ -93,7 +93,7 @@ const Login = () => {
                 {...register("Pin", {
                   required: {
                     value: true,
-                    message: "Pin is required",
+                    message: "Pin  is required",
                   },
                   minLength: {
                     value: /^(\d{4}|\d{6})$/,

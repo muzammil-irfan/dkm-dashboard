@@ -10,21 +10,32 @@ const Location = () => {
         <label for="my-modal-3" class="btn modal-button btn-warning">Add New</label>
         {/* modal  */}
         <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-        <div class="modal">
-          <div class="modal-box relative">
+        <div class="modal ">
+          <div class="modal-box relative p-10 flex-col">
             <label
               for="my-modal-3"
-              class="btn btn-sm btn-circle absolute right-2 top-2"
+              class="btn btn-sm btn-circle absolute right-2 top-2 "
             >
               ✕
             </label>
-            <h3 class="text-lg font-bold">
-              Congratulations random Internet user!
-            </h3>
-            <p class="py-4">
-              You've been selected for a chance to get one year of subscription
-              to use Wikipedia for free!
-            </p>
+           <h1 className='text-2xl font-bold ml-7'>Add member</h1>
+           <div className='flex justify-center items-center flex-col'>
+           <input
+                type="email"
+                placeholder="Name"
+                class="input input-bordered w-96 bg-white mt-5 rounded-full"
+              />
+           <input
+                type="email"
+                placeholder="Address"
+                class="input input-bordered w-96 bg-white mt-5 rounded-full"
+              />
+              <input
+                type="submit"
+                value="Save"
+                className="btn text-white w-96 mt-10 rounded-full"
+              />
+           </div>
           </div>
         </div>
       </div>

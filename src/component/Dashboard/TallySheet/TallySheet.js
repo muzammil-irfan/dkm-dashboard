@@ -1,52 +1,27 @@
 import React from "react";
 import "./TallySheet.css";
-// import Button from '@mui/material/Button';
-// import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
-// import DialogTitle from '@mui/material/DialogTitle';
-// import Slide from '@mui/material/Slide';
 
 const TallySheet = () => {
-  //   const [open, setOpen] = useState(false);
-
-  //   const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
-
-  //   const handleClose = () => {
-  //     setOpen(false);
-  //   }
-
-  //     const Transition = React.forwardRef(function Transition(props, ref) {
-  //       return <Slide direction="up" ref={ref} {...props} />;
-  //     });
   return (
     <div>
       <div>
         <h1 className="text-xl font-bold text-black">Tally Sheet</h1>
       </div>
-      <div className="flex my-10 ">
+      <div className="flex my-10 mx-5">
         <label
           for="my-modal-4"
-          class="p-5 px-14 rounded-md text-center shadow-md"
+          class="p-5 px-14 rounded-md text-center shadow-md mr-8"
         >
           <p>Ticket Number</p>
           <h1 className="text-3xl text-black cursor-pointer font-bold">60</h1>
         </label>
         <input type="checkbox" id="my-modal-4" class="modal-toggle" />
         <label for="my-modal-4" class="modal cursor-pointer">
-          <label class="modal-box relative" for="">
-            <h3 class="text-lg font-bold">Change Ticket Number</h3>
+          <div class="modal-box relative p-10 flex items-center flex-col py-20" for="">
+            <h3 class="text-3xl font-bold">Change Ticket Number</h3>
             <input
-              type="email"
-              placeholder="Name"
-              class="input input-bordered w-96 bg-white mt-5 rounded-full"
-            />
-            <input
-              type="email"
-              placeholder="Name"
+              type="ticket-number"
+              placeholder="Ticket Number"
               class="input input-bordered w-96 bg-white mt-5 rounded-full"
             />
             <input
@@ -54,27 +29,22 @@ const TallySheet = () => {
               value="Save"
               className="btn text-white w-96 mt-10 rounded-full"
             />
-          </label>
+          </div>
         </label>
         <label
-          for="my-modal-4"
+          for="my-modal-5"
           class="p-5 px-14 rounded-md cursor-pointer text-center shadow-md"
         >
           <p>DKM Number</p>
           <h1 className="text-3xl text-black font-bold">60</h1>
         </label>
-        <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-        <label for="my-modal-4" class="modal cursor-pointer">
-          <label class="modal-box relative" for="">
-            <h3 class="text-lg font-bold">Change DKM Number</h3>
+        <input type="checkbox" id="my-modal-5" class="modal-toggle" />
+        <label for="my-modal-5" class="modal cursor-pointer ">
+          <div class="modal-box relative flex flex-col justify-center items-center py-20">
+            <h3 class="text-3xl font-bold">Change DKM Number</h3>
             <input
               type="email"
-              placeholder="Name"
-              class="input input-bordered w-96 bg-white mt-5 rounded-full"
-            />
-            <input
-              type="email"
-              placeholder="Name"
+              placeholder="DKM Number"
               class="input input-bordered w-96 bg-white mt-5 rounded-full"
             />
             <input
@@ -82,52 +52,8 @@ const TallySheet = () => {
               value="Save"
               className="btn text-white w-96 mt-10 rounded-full"
             />
-          </label>
+          </div>
         </label>
-
-        {/* <Button variant="outlined" onClick={handleClickOpen}>
-          Slide in alert dialog
-        </Button> */}
-        {/* <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"Change DKM Number"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description flex justify-center">
-          <input
-                type="email"
-                placeholder="Name"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
-              />
-          <input
-                type="email"
-                placeholder="Name"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
-              />
-              <input
-                type="submit"
-                value="Save"
-                className="btn text-white w-96 mt-10 rounded-full"
-              />
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
-        </DialogActions>
-      </Dialog>
-        <button onClick={handleClickOpen} className="p-5 mr-5 px-14 rounded-md text-center shadow-md">
-          <p>DKM Number</p>
-          <h1 className="text-3xl text-black font-bold">60</h1>
-        </button>
-        <button onClick={handleClickOpen} className="p-5 px-14 rounded-md text-center shadow-md">
-          <p>Ticket Number</p>
-          <h1 className="text-3xl text-black font-bold">60</h1>
-        </button> */}
       </div>
       <div className=" px-5 py-10  shadow-lg bg-slate-50">
         <div class=" tallyGrid text-[10px]">

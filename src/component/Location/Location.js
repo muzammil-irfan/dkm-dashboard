@@ -7,13 +7,13 @@ const Location = () => {
         <div>
       <div className="flex justify-between items-center">
         <h1 className="text-xl text-black font-bold">Locations</h1>
-        <label for="my-modal-3" class="btn modal-button btn-warning">Add New</label>
+        <label for="my-modal-6" class="btn modal-button btn-warning">Add New</label>
         {/* modal  */}
-        <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+        <input type="checkbox" id="my-modal-6" class="modal-toggle" />
         <div class="modal ">
           <div class="modal-box relative p-10 flex-col">
             <label
-              for="my-modal-3"
+              for="my-modal-6"
               class="btn btn-sm btn-circle absolute right-2 top-2 "
             >
               ✕

@@ -1,31 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import bgImg from "../../asset/Union 76.png";
 import loginIllustration from "../../asset/Group 69986.png";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import auth from "../../Firebase/firebase.init";
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Login = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
 
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+ 
+    const location = useLocation();
+    const navigate = useNavigate();
+    let from =  "/dashboard";
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    await signInWithEmailAndPassword(data.email, data.password);
-    reset();
-  };
+    if ( user) {
+      navigate(from, { replace: true });
+      alert.success("Login successful")
+  }
 
   return (
     <div className="bg-yellow-400 py-32 p-20">
@@ -43,70 +38,35 @@ const Login = () => {
           <div className=" border-l-2 p-20 flex flex-col items-center">
             <h1 className="text-2xl font-bold	text-black">Sign in</h1>
             <p>Login to your account</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form>
               <input
-                type="email"
                 placeholder="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 class="input input-bordered w-96 bg-white mt-5 rounded-full"
-                {...register("email", {
-                  required: {
-                    value: true,
-                    message: "Email is required",
-                  },
-                  pattern: {
-                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                    message: "Provide a valid email",
-                  },
-                })}
               />
-              <label className="label">
-                {errors.email?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.email.message}
-                  </span>
-                )}
-                {errors.email?.type === "pattern" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.email.message}
-                  </span>
-                )}
-              </label>
               <input
-                type="Password"
                 placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "Password is required",
-                  },
-                  minLength: {
-                    value: /^(\d{4}|\d{6})$/,
-                    message: "Minimum 6 characters required",
-                  },
-                })}
               />
               <input
                 type="Pin"
                 placeholder="Pin"
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
-                {...register("Pin", {
-                  required: {
-                    value: true,
-                    message: "Pin  is required",
-                  },
-                  minLength: {
-                    value: /^(\d{4}|\d{6})$/,
-                    message: "Minimum 6 characters required",
-                  },
-                })}
               />
               <Link to="/dashboard">
-              <input
-                type="submit"
-                value="Sign in"
-                className="btn text-white w-full mt-10 rounded-full"
-              />
+                <input
+                  onClick={() =>
+                    createUserWithEmailAndPassword(email, password)
+                  }
+                  type="submit"
+                  value="Sign in"
+                  className="btn text-white w-full mt-10 rounded-full"
+                />
               </Link>
             </form>
           </div>

@@ -1,28 +1,30 @@
-import React from 'react';
+import auth from '../../Firebase/firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import auth from '../../Firebase/firebase.init';
-import Loading from '../Loading/Loading';
 
 
 const RequireAuth = ({ children }) => {
-
-    const [user, loading] = useAuthState(auth);
+    const [user, loading, error] = useAuthState(auth);
     const location = useLocation();
-
-    if (loading) {
-        return <Loading />
-    }
-
-    if (!user) {
-        toast.warning("You need to login first");
-    }
-
-    if (user) {
-        return children;
-    }
-    else {
+    
+    if (error) {
+        return (
+          <div>
+            <p>Error: {error.message}</p>
+          </div>
+        );
+      }
+      if (loading) {
+        return <p>Loading...</p>;
+      }
+      if (user) {
+        return (
+          <div>
+            <p>Registered User: {user.email}</p>
+          </div>
+        );
+      }
+      if (user) {
         return <Navigate to='/login' state={{ from: location }} replace></Navigate>
     }
 };

@@ -1,9 +1,9 @@
-import React from 'react';
-import { BsChevronDown } from 'react-icons/bs';
+import React from "react";
+import { BsChevronDown } from "react-icons/bs";
 
 const Users = () => {
-    return (
-        <div>
+  return (
+    <div>
       <div className="flex justify-between items-center">
         <h1 className="text-xl text-black font-bold">Users</h1>
       </div>
@@ -21,15 +21,17 @@ const Users = () => {
               {/* <!-- row 2 --> */}
               <tr>
                 <td className="text-gray-400">debra holt</td>
-                <td className="text-gray-400">
-                debra.holt@example.com
-                </td>
-                <td className="text-gray-400">
-                024
-                </td>
+                <td className="text-gray-400">debra.holt@example.com</td>
+                <td className="text-gray-400">024</td>
                 <td className="flex items-center">
-                Pending 
-                <BsChevronDown/>
+                  <select class="select w-36">
+                    <option disabled selected>
+                      Pending <BsChevronDown />
+                    </option>
+                    <option>Approved</option>
+                    <option>Pending</option>
+                    <option>Paused</option>
+                  </select>
                 </td>
               </tr>
             </tbody>
@@ -37,7 +39,7 @@ const Users = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default Users;

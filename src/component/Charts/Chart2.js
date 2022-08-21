@@ -43,7 +43,7 @@ import {
 export default function App() {
   const [bars, setBars] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/bar")
+    fetch("https://dashboard-f.herokuapp.com/bar")
       .then((res) => res.json())
       .then((data) => setBars(data));
   }, [bars]);

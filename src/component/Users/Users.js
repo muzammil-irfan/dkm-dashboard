@@ -5,7 +5,7 @@ import User from "./User";
 const Users = () => {
   const [users, setUser] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch("https://dashboard-f.herokuapp.com/user")
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, [users]);

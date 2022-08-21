@@ -63,11 +63,11 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
               />
-              {/* <input
+              <input
                 type="Pin"
                 placeholder="Pin"
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
-              /> */}
+              />
               {/* <Link to="/dashboard"> */}
                 <input
                   type="submit"

@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAwz-n4jRwpCgFTVR15yW8twZNJBzXlnTI",
-  authDomain: "dasboard-f.firebaseapp.com",
-  projectId: "dasboard-f",
-  storageBucket: "dasboard-f.appspot.com",
-  messagingSenderId: "308006524056",
-  appId: "1:308006524056:web:9364beafd2043a756c2ced",
+  apiKey: "AIzaSyDKE5uwV-N5FbgUCtFZ9GM5-mWHCzzP-ks",
+  authDomain: "dashboard-f-ec65d.firebaseapp.com",
+  projectId: "dashboard-f-ec65d",
+  storageBucket: "dashboard-f-ec65d.appspot.com",
+  messagingSenderId: "593030927512",
+  appId: "1:593030927512:web:3bca121f1c5b6822afeced"
 };
 
 const app = initializeApp(firebaseConfig);

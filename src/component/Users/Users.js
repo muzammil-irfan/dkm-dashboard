@@ -1,11 +1,19 @@
-import React from "react";
-import { BsChevronDown } from "react-icons/bs";
+import { useEffect, useState } from "react";
+
+import User from "./User";
 
 const Users = () => {
+  const [users, setUser] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/user")
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  }, [users]);
+
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h1 className="text-xl text-black font-bold">Users</h1>
+        <h1 className="text-xl text-black font-bold">User</h1>
       </div>
       <div className="my-10 rounded-lg shadow-md h-96">
         <div class="overflow-x-auto ">
@@ -19,21 +27,12 @@ const Users = () => {
                 <td className="text-black font-semibold">Approval</td>
               </tr>
               {/* <!-- row 2 --> */}
-              <tr>
-                <td className="text-gray-400">debra holt</td>
-                <td className="text-gray-400">debra.holt@example.com</td>
-                <td className="text-gray-400">024</td>
-                <td className="flex items-center">
-                  <select class="select w-36">
-                    <option disabled selected>
-                      Pending <BsChevronDown />
-                    </option>
-                    <option>Approved</option>
-                    <option>Pending</option>
-                    <option>Paused</option>
-                  </select>
-                </td>
-              </tr>
+              
+                
+                  {users?.map((user) => <User user={user} >
+
+                  </User>
+                    )}
             </tbody>
           </table>
         </div>

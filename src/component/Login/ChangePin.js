@@ -30,7 +30,7 @@ const ChangePin = () => {
           <div className="p-20">
             <img src={loginIllustration} alt="" />
           </div>
-          <div className=" border-l-2 p-20 flex flex-col items-center">
+          <div className=" border-l-2 p-20 flex flex-col mx auto">
             <h1 className="text-2xl font-bold	text-black">Change Pin:</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
@@ -79,7 +79,7 @@ const ChangePin = () => {
               <input
                 type="submit"
                 value="Sign in"
-                className="btn text-white w-full mt-10 rounded-full"
+                className="btn text-white w-96 mt-10 rounded-full"
               />
               </Link>
             </form>

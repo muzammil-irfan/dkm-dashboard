@@ -1,30 +1,26 @@
-import auth from '../../Firebase/firebase.init';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation } from 'react-router-dom';
+import auth from '../../Firebase/firebase.init';
 
 
 const RequireAuth = ({ children }) => {
-    const [user, loading, error] = useAuthState(auth);
+
+    const [user, loading] = useAuthState(auth);
     const location = useLocation();
-    
-    if (error) {
-        return (
-          <div>
-            <p>Error: {error.message}</p>
-          </div>
-        );
-      }
-      if (loading) {
-        return <p>Loading...</p>;
-      }
-      if (user) {
-        return (
-          <div>
-            <p>Registered User: {user.email}</p>
-          </div>
-        );
-      }
-      if (user) {
+
+    if (loading) {
+        return "Loading..."
+    }
+
+    if (!user) {
+        alert("You need to login for manage the products")
+    }
+
+    if (user) {
+        return children;
+    }
+    else {
         return <Navigate to='/login' state={{ from: location }} replace></Navigate>
     }
 };

@@ -34,8 +34,8 @@ const ChangePassword = () => {
           <div className="p-20">
             <img src={loginIllustration} alt="" />
           </div>
-          <div className=" border-l-2 p-20 flex flex-col items-center">
-            <h1 className="text-2xl font-bold	text-black">Change Password:</h1>
+          <div className=" border-l-2 p-20 flex flex-col mx-auto">
+            <h1 className="text-2xl font-bold	text-black ">Change Password:</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
                 type="Old-Password"

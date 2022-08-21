@@ -3,25 +3,35 @@ import bgImg from "../../asset/Union 76.png";
 import loginIllustration from "../../asset/Group 69986.png";
 // import { useForm } from "react-hook-form";
 import auth from "../../Firebase/firebase.init";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+import useToken from "../../Hooks/useToken"
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Login = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
- 
-    const location = useLocation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth);
+  
+  
+
     const navigate = useNavigate();
-    let from =  "/dashboard";
+    const [token] = useToken(user)
+
+    console.log(error);
 
     if ( user) {
-      navigate(from, { replace: true });
-      alert.success("Login successful")
+      navigate("/dashboard")
   }
 
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    createUserWithEmailAndPassword(email, password)
+  }
   return (
     <div className="bg-yellow-400 py-32 p-20">
       <div className="relative z-10">
@@ -38,7 +48,7 @@ const Login = () => {
           <div className=" border-l-2 p-20 flex flex-col items-center">
             <h1 className="text-2xl font-bold	text-black">Sign in</h1>
             <p>Login to your account</p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <input
                 placeholder="Email"
                 type="email"
@@ -53,21 +63,18 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
               />
-              <input
+              {/* <input
                 type="Pin"
                 placeholder="Pin"
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
-              />
-              <Link to="/dashboard">
+              /> */}
+              {/* <Link to="/dashboard"> */}
                 <input
-                  onClick={() =>
-                    createUserWithEmailAndPassword(email, password)
-                  }
                   type="submit"
                   value="Sign in"
                   className="btn text-white w-full mt-10 rounded-full"
                 />
-              </Link>
+              {/* </Link> */}
             </form>
           </div>
         </div>

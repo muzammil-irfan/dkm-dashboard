@@ -8,25 +8,24 @@ import Location from "./component/Location/Location";
 import ChangePassword from "./component/Login/ChangePassword";
 import ChangePin from "./component/Login/ChangePin";
 import Login from "./component/Login/Login";
-import RequireAuth from "./component/RequireAuth/RequireAuth";
 import Users from "./component/Users/Users";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Login/>} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/changePass" element={<ChangePassword/>} />
-      <Route path="/changePin" element={<ChangePin/>} />
-      <Route path="/dashboard" element={<Dashboard/>}>
-      <Route index  element={<MainDashboard/>} />
-      <Route path="customers" element={<Customers/>} />
-      <Route path="users" element={<Users/>} />
-      <Route path="location" element={<Location/>} />
-      <Route path="tally-sheet" element={<TallySheet/>} />
-      </Route>
-      
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/changePass" element={<ChangePassword />} />
+        <Route path="/changePin" element={<ChangePin />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="mainDashboard" element={<MainDashboard />} />
+          <Route path="customers" element={<Customers />} />
+          <Route path="users" element={<Users />} />
+          <Route path="location" element={<Location />} />
+          <Route path="tally-sheet" element={<TallySheet />} />
+          {/* <Route path="" element={<MainDashboard />} /> */}
+        </Route>
       </Routes>
     </BrowserRouter>
   );

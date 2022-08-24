@@ -30,7 +30,7 @@ const Dashboard = () => {
           </p>
 
           <NavLink
-            to="/dashboard"
+            to="mainDashboard"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }
@@ -41,7 +41,7 @@ const Dashboard = () => {
             </p>
           </NavLink>
           <NavLink
-            to="/dashboard/tally-sheet"
+            to="tally-sheet"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }
@@ -52,13 +52,13 @@ const Dashboard = () => {
             </p>
             </NavLink>
             <NavLink
-            to="/dashboard/tally-sheet"
+            to="tally-sheet"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }
           ></NavLink>
           <NavLink
-            to="/dashboard/users"
+            to="users"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }
@@ -69,7 +69,7 @@ const Dashboard = () => {
           </p>
           </NavLink>
           <NavLink
-            to="/dashboard/location"
+            to="location"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }
@@ -80,7 +80,7 @@ const Dashboard = () => {
           </p>
           </NavLink>
           <NavLink
-            to="/dashboard/customers"
+            to="customers"
             style={({ isActive }) =>
               isActive ? { backgroundColor: "gray" } : { backgroundColor: "#313131" }
             }
@@ -93,7 +93,7 @@ const Dashboard = () => {
           <div class="dropdown  m-0 p-5 text-white">
             <label tabindex="0" class=" m-1">
               <AiOutlineSetting className="text-white inline-block relative bottom-[2px] mr-1" />
-              Click
+              Settings
             </label>
             <ul
               tabindex="0"

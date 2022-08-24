@@ -46,15 +46,15 @@ const Location = () => {
               {/* <!-- row 1 --> */}
               <tr>
                 <td className="text-black font-semibold">Name</td>
-                <td className="text-black font-semibold">Address</td>
+                {/* <td className="text-black font-semibold">Address</td> */}
                 <td className="text-black font-semibold">Edit/Delete</td>
               </tr>
               {/* <!-- row 2 --> */}
               <tr>
                 <td className="text-gray-400">Erin Rhiel Madsen</td>
-                <td className="text-gray-400">
+                {/* <td className="text-gray-400">
                   2464 Royal Ln. Mesa, New Jersey 45463
-                </td>
+                </td> */}
                 <td className="flex">
                   <button class="btn btn-ghost btn-outline mx-2">
                     <FiEdit />

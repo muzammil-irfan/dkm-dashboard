@@ -1,8 +1,6 @@
 import React from "react";
-import loginIllustration from "../../asset/Group 69986.png";
+import loginIllustration from "../../asset/WhatsApp Image 2022-08-24 at 3.54.08 PM.jpeg";
 import { useForm } from "react-hook-form";
-import auth from "../../Firebase/firebase.init";
-import { useSignInWithEmailAndPin } from 'react-firebase-hooks/auth';
 import { Link } from "react-router-dom";
 
 const ChangePin = () => {
@@ -27,7 +25,7 @@ const ChangePin = () => {
     <div className=" py-32 p-20">
       <div className=" shadow-md rounded-xl relative z-10">
         <div className="bg-white px-10 mx-20 grid grid-cols-2 Z-50 rounded-3xl">
-          <div className="p-20">
+          <div className="p-20 flex items-center">
             <img src={loginIllustration} alt="" />
           </div>
           <div className=" border-l-2 p-20 flex flex-col mx auto">

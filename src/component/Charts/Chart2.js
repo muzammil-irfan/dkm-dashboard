@@ -40,19 +40,19 @@ import {
 
 
 
-export default function App() {
-  const [bars, setBars] = useState([]);
-  useEffect(() => {
-    fetch("https://dashboard-f.herokuapp.com/bar")
-      .then((res) => res.json())
-      .then((data) => setBars(data));
-  }, [bars]);
+export default function CustomerChart({data}) {
+  // const [bars, setBars] = useState([]);
+  // useEffect(() => {
+  //   fetch("https://dashboard-f.herokuapp.com/bar")
+  //     .then((res) => res.json())
+  //     .then((data) => setBars(data));
+  // }, [bars]);
 
   return (
     <BarChart
       width={930}
       height={400}
-      data={bars}
+      data={data}
       margin={{
         top: 5,
         right: 0,
@@ -61,9 +61,9 @@ export default function App() {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="customer_name" />
       <YAxis />
-      <Bar barSize={30} dataKey="uv" fill="#F6D136" />
+      <Bar barSize={30} dataKey="total" fill="#F6D136" />
     </BarChart>
   );
 }

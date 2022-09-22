@@ -1,14 +1,23 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import backendHost from "../../utils/backendHost";
 
 import User from "./User";
 
 const Users = () => {
-  const [users, setUser] = useState([]);
+  const [user, setUser] = useState([]);
   useEffect(() => {
-    fetch("https://dashboard-f.herokuapp.com/user")
-      .then((res) => res.json())
-      .then((data) => setUser(data));
-  }, [users]);
+    // fetch("https://dashboard-f.herokuapp.com/user")
+    //   .then((res) => res.json())
+    //   .then((data) => setUser(data));
+    axios.get(`${backendHost}/user/ticket/`)
+    .then(res=>{
+      setUser(res.data);
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+  }, []);
 
   return (
     <div>
@@ -29,9 +38,7 @@ const Users = () => {
               {/* <!-- row 2 --> */}
               
                 
-                  {users?.map((user) => <User user={user} >
-
-                  </User>
+                  {user.length !== 0 && user.map((item) => <User user={item} key={item.name} />
                     )}
             </tbody>
           </table>

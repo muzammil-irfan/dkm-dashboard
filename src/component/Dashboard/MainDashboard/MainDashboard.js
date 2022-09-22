@@ -1,8 +1,29 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
+import backendHost from "../../../utils/backendHost";
 import Chart from "../../Charts/Chart"
 import Chart2 from "../../Charts/Chart2"
 
 const MainDashboard = () => {
+  const [locationTotal,setLocationTotal] = useState([]);
+  const [customerTotal,setCustomerTotal] = useState([]);
+  useEffect(() => {
+    axios.get(`${backendHost}/total_ft/`)
+    .then(res=>{
+      setLocationTotal(res.data);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+    axios.get(`${backendHost}/customer_order/`)
+    .then(res=>{
+      setCustomerTotal(res.data);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }, [])
+  
   return (
     <div className="flex flex-col justify-start">
       <div className="">
@@ -28,7 +49,7 @@ const MainDashboard = () => {
         </div>
         </div>
         <div className="my-10">
-        <Chart/>
+        <Chart data={locationTotal} />
         </div>
       </div>
       {/* Customers x Orders chart  */}
@@ -50,7 +71,7 @@ const MainDashboard = () => {
         </div>
         </div>
         <div className="my-10">
-        <Chart2/>
+        <Chart2 data={customerTotal}/>
         </div>
       </div>
     </div>

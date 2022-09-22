@@ -1,10 +1,11 @@
 import React from "react";
-import bgImg from "../../asset/Union 76.png";
+// import bgImg from "../../asset/Union 76.png";
 import loginIllustration from "../../asset/WhatsApp Image 2022-08-24 at 3.54.08 PM.jpeg";
 import { useForm } from "react-hook-form";
-import auth from "../../Firebase/firebase.init";
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+// import auth from "../../Firebase/firebase.init";
+// import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link } from "react-router-dom";
+import jwt_decode from 'jwt-decode'
 
 const ChangePassword = () => {
   const {
@@ -14,17 +15,17 @@ const ChangePassword = () => {
     reset,
   } = useForm();
 
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
+  // const [
+  //   signInWithEmailAndPassword,
+  //   user,
+  //   loading,
+  //   error,
+  // ] = useSignInWithEmailAndPassword(auth);
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    await signInWithEmailAndPassword(data.email, data.password);
-    reset();
+  const onSubmit = (data) => {
+    const decodedToken = jwt_decode(sessionStorage.getItem("token"));
+    
+    console.log(data,decodedToken);
   };
 
   return (
@@ -94,13 +95,13 @@ const ChangePassword = () => {
                   },
                 })}
               />
-              <Link to="/dashboard">
+              {/* <Link to="/dashboard"> */}
               <input
                 type="submit"
                 value="Sign in"
                 className="btn text-white w-full mt-10 rounded-full"
               />
-              </Link>
+              {/* </Link> */}
             </form>
           </div>
         </div>

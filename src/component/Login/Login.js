@@ -6,11 +6,16 @@ import auth from "../../Firebase/firebase.init";
 import {  useNavigate } from 'react-router-dom';
 import useToken from "../../Hooks/useToken"
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import axios from "axios";
+import backendHost from "../../utils/backendHost";
 
 const Login = () => {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const initialValues = {
+    email:"",
+    password:"",
+    pin:""
+  }
+  const [ values, setValues ] = useState(initialValues);
   const [
     createUserWithEmailAndPassword,
     user,
@@ -27,10 +32,25 @@ const Login = () => {
     if ( user) {
       navigate("/dashboard/mainDashboard")
   }
-
+  const handleChange = (e)=>{
+    const {name,value} = e.target;
+    setValues({...values,[name]: value});
+  }
   const handleSubmit=(e)=>{
     e.preventDefault()
-    createUserWithEmailAndPassword(email, password)
+    console.log(values);
+    if(typeof values.pin !== 'number'){
+      setValues({...values,pin:Number(values.pin)})
+    }
+    axios.post(`${backendHost}/admin/login`,values)
+    .then(res=>{
+      console.log(res.data.message);
+      sessionStorage.setItem("token",res.data.token);
+      navigate("/dashboard/mainDashboard");
+    })  
+    .catch(err=>{
+      console.log(err);
+    });
   }
   return (
     <div className="bg-yellow-400 py-32 p-20">
@@ -52,20 +72,25 @@ const Login = () => {
               <input
                 placeholder="Email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={values.email}
+                onChange={handleChange}
                 class="input input-bordered w-96 bg-white mt-5 rounded-full"
               />
               <input
                 placeholder="Password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                value={values.password}
+                onChange={handleChange}
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
               />
               <input
                 type="Pin"
                 placeholder="Pin"
+                name="pin"
+                value={values.pin}
+                onChange={handleChange}
                 class="input input-bordered w-96 bg-white my-5 rounded-full"
               />
               {/* <Link to="/dashboard"> */}

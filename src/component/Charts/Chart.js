@@ -39,19 +39,20 @@ import {
 // ];
 
 
-export default function App() {
-const [bars, setBars] = useState([]);
-  useEffect(() => {
-    fetch("https://dashboard-f.herokuapp.com/bar")
-      .then((res) => res.json())
-      .then((data) => setBars(data));
-  }, [bars]);
+export default function LocationChart({data}) {
+// const [bars, setBars] = useState([]);
+//   useEffect(() => {
+//     fetch(``)
+//       .then((res) => res.json())
+//       .then((data) => setBars(data));
+//       console.log(bars)
+//   }, [bars]);
 
   return (
     <BarChart
       width={930}
       height={400}
-      data={bars}
+      data={data}
       margin={{
         top: 5,
         right: 0,
@@ -60,9 +61,9 @@ const [bars, setBars] = useState([]);
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" domain={[0, 'dataMax + 100']}/>
+      <XAxis dataKey="location_name" domain={[0, 'dataMax + 100']}/>
       <YAxis type="number"  />
-      <Bar barSize={30} dataKey="uv" fill="#8AA67F" />
+      <Bar barSize={30} dataKey="total_ft" fill="#8AA67F" />
     </BarChart>
   );
 }

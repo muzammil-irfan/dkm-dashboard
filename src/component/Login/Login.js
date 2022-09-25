@@ -45,7 +45,7 @@ const Login = () => {
     axios.post(`${backendHost}/admin/login`,values)
     .then(res=>{
       console.log(res.data.message);
-      sessionStorage.setItem("token",res.data.token);
+      sessionStorage.setItem("user",values.email);
       navigate("/dashboard/mainDashboard");
     })  
     .catch(err=>{

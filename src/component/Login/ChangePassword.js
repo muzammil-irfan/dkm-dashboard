@@ -2,10 +2,10 @@ import React from "react";
 // import bgImg from "../../asset/Union 76.png";
 import loginIllustration from "../../asset/WhatsApp Image 2022-08-24 at 3.54.08 PM.jpeg";
 import { useForm } from "react-hook-form";
-// import auth from "../../Firebase/firebase.init";
-// import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link } from "react-router-dom";
-import jwt_decode from 'jwt-decode'
+import axios from "axios";
+import backendHost from "../../utils/backendHost";
+import { toast } from 'react-toastify';
+import CommonToast,{errorHandler} from "../common/CommonToast";
 
 const ChangePassword = () => {
   const {
@@ -13,23 +13,31 @@ const ChangePassword = () => {
     formState: { errors },
     handleSubmit,
     reset,
+    watch
   } = useForm();
 
-  // const [
-  //   signInWithEmailAndPassword,
-  //   user,
-  //   loading,
-  //   error,
-  // ] = useSignInWithEmailAndPassword(auth);
-
   const onSubmit = (data) => {
-    const decodedToken = jwt_decode(sessionStorage.getItem("token"));
-    
-    console.log(data,decodedToken);
-  };
-
+    const userEmail = sessionStorage.getItem("user");
+    if(userEmail){
+      const obj = {
+        email:userEmail,
+        oldPassword:data.oldPassword,
+        newPassword:data.newPassword
+      }
+      axios.post(`${backendHost}/admin/updatepassword`,obj)
+      .then(res=>{
+        reset();
+        toast.success(res.data.message);
+      })
+      .catch(err=>{
+        console.log(err)
+        errorHandler(err);
+      })
+    }
+  };  
   return (
     <div className=" py-32 p-20">
+      <CommonToast />
       <div className=" shadow-md rounded-xl relative z-10">
         <div className="bg-white px-10 mx-20 grid grid-cols-2 Z-50 rounded-3xl">
           <div className="p-20 flex items-center">
@@ -41,60 +49,74 @@ const ChangePassword = () => {
               <input
                 type="Old-Password"
                 placeholder="Old Password"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
-                {...register("password", {
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
+                {...register("oldPassword", {
                   required: {
                     value: true,
                     message: "Password is required",
                   },
                   minLength: {
-                    value: /^(\d{4}|\d{6})$/,
+                    value:6,
                     message: "Minimum 6 characters required",
                   },
                 })}
               />
               <label className="label">
-                {errors.email?.type === "required" && (
+                {errors.oldPassword && (
                   <span className="label-text-alt text-red-500">
-                    {errors.email.message}
-                  </span>
-                )}
-                {errors.email?.type === "pattern" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.email.message}
+                    {errors.oldPassword.message}
                   </span>
                 )}
               </label>
               <input
                 type="New-Password"
                 placeholder="New Password"
-                class="input input-bordered w-96 bg-white my-5 rounded-full"
-                {...register("password", {
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
+                {...register("newPassword", {
                   required: {
                     value: true,
                     message: "Password is required",
                   },
                   minLength: {
-                    value: /^(\d{4}|\d{6})$/,
+                    value: 6,
                     message: "Minimum 6 characters required",
                   },
                 })}
               />
+              <label className="label">
+                {errors.newPassword && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.newPassword.message}
+                  </span>
+                )}
+              </label>
               <input
                 type="Confirm-Password"
                 placeholder="Confirm Password"
-                class="input input-bordered w-96 bg-white my-5 rounded-full"
-                {...register("password", {
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
+                {...register("newPassword2", {
                   required: {
                     value: true,
                     message: "Password is required",
                   },
+                  validate: (val) => {
+                    if (watch('newPassword') != val) {
+                      return "Your passwords do no match";
+                    }
+                  },
                   minLength: {
-                    value: /^(\d{4}|\d{6})$/,
+                    value: 6,
                     message: "Minimum 6 characters required",
                   },
                 })}
               />
+              <label className="label">
+                {errors.newPassword2 && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.newPassword2.message}
+                  </span>
+                )}
+              </label>
               {/* <Link to="/dashboard"> */}
               <input
                 type="submit"
@@ -106,6 +128,7 @@ const ChangePassword = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

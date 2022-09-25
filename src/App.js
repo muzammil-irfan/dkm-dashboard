@@ -9,6 +9,7 @@ import ChangePassword from "./component/Login/ChangePassword";
 import ChangePin from "./component/Login/ChangePin";
 import Login from "./component/Login/Login";
 import Users from "./component/Users/Users";
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from "./component/common/Sidebar";
 function App() {
   return (

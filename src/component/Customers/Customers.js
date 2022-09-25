@@ -3,58 +3,114 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import axios from 'axios';
 import backendHost from "../../utils/backendHost";
+import { toast } from "react-toastify";
+import { errorHandler } from "../common/CommonToast";
 
 const Customers = () => {
   const [customer, setCustomer] = useState([]);
-  useEffect(() => {
+  const initialValues = {
+    name:"",
+    address:""
+  }
+  const [values,setValues] = useState(initialValues)
+  const handleChange = (e)=>{
+    const {name,value} = e.target;
+    setValues({...values, [name]:value});
+  }
+  const [type,setType] = useState("create");
+  const [id,setId] = useState("");
+  const handleSubmit = ()=>{
+    //It will change the endpoint depending on the type so we can create and edit from same model without link method
+    if(type === 'update'){
+      
+      axios.put(`${backendHost}/customer/edit/${id}`,values)
+      .then(res=>{
+        dataFetcher();
+        toast.success(res.data.message);
+      })
+      .catch(err=>{
+      errorHandler(err);
+    });
+  } else {
+    axios.post(`${backendHost}/customer/add`,values)
+    .then(res=>{
+      dataFetcher();
+      toast.success(res.data.message);
+      })
+      .catch(err=>{
+        errorHandler(err);
+      });
+    }
+
+  }
+  const handleButton = (item, buttonType) =>{
+    if(buttonType === 'edit'){
+      setId(item.id);
+      setType("update");
+    } else {
+      axios.delete(`${backendHost}/customer/delete/${item.id}`)
+      .then(res=>{
+        toast.success(res.data.message);
+      })
+      .catch(err=>{
+        errorHandler(err);
+      })
+    }
+  }
+  const dataFetcher = ()=>{
     axios
       .get(`${backendHost}/customer/`)
-      .then((res) => {
+      .then((res) => {  
         setCustomer(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err);   
       });
+  }
+  useEffect(() => {
+    dataFetcher();
   }, []);
   return (
     <div>
       <div className="flex justify-between items-center">
         <h1 className="text-xl text-black font-bold">Customers</h1>
-        <label for="my-modal-3" class="btn modal-button btn-warning">Add New</label>
+        <label htmlFor="my-modal-3" className="btn modal-button btn-warning">Add New</label>
         {/* modal  */}
-        <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-        <div class="modal ">
-          <div class="modal-box relative p-10 flex-col">
+        <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+        <div className="modal ">
+          <div className="modal-box relative p-10 flex-col">
             <label
-              for="my-modal-3"
-              class="btn btn-sm btn-circle absolute right-2 top-2 "
+              htmlFor="my-modal-3"
+              className="btn btn-sm btn-circle absolute right-2 top-2 "
             >
               ✕
             </label>
            <h1 className='text-2xl font-bold ml-7'>Add member</h1>
            <div className='flex justify-center items-center flex-col'>
            <input
-                type="email"
                 placeholder="Name"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
               />
            <input
-                type="email"
                 placeholder="Address"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
+                name="address"
+                value={values.address}
+                onChange={handleChange}
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
               />
-              <input
-                type="submit"
-                value="Save"
-                className="btn text-white w-96 mt-10 rounded-full"
-              />
+              <button className="btn text-white w-96 mt-10 rounded-full" onClick={handleSubmit}>
+                Save
+              </button>
            </div>
           </div>
         </div>
       </div>
       <div className="my-10 rounded-lg shadow-md h-96">
-        <div class="overflow-x-auto ">
-          <table class="table w-full ">
+        <div className="overflow-x-auto ">
+          <table className="table w-full ">
             <tbody>
               {/* <!-- row 1 --> */}
               <tr>
@@ -73,10 +129,10 @@ const Customers = () => {
                         {item.address}
                       </td>
                       <td className="flex">
-                        <button class="btn btn-ghost btn-outline mx-2">
+                        <button className="btn btn-ghost btn-outline mx-2" onClick={()=>{handleButton(item, "edit")}}>
                           <FiEdit />
                         </button>
-                        <button class="btn bg-red-500">
+                        <button className="btn bg-red-500" onClick={()=>{handleButton(item, "delete")}}>
                           <RiDeleteBinLine />
                         </button>
                       </td>

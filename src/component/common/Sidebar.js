@@ -10,8 +10,8 @@ const Sidebar = ({children}) => {
   const navigate = useNavigate();
   const pN = window.location.pathname;
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    if(!token){
+    const user = sessionStorage.getItem("user");
+    if(!user){
       navigate('/login');
     };
   }, [pN]);
@@ -27,14 +27,14 @@ const Sidebar = ({children}) => {
          */}
         {children}
         <label
-          for="my-drawer-2"
+          htmlFor="my-drawer-2"
           className="btn btn-primary drawer-button lg:hidden"
         >
           Open drawer
         </label>
       </div>
       <div className="drawer-side ">
-        <label for="my-drawer-2" className="drawer-overlay"></label>
+        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu py-4 overflow-y-auto w-80 bg-[#313131] text-base-content">
           <p className="font-bold text-center mt-5 mb-10 text-white">
             Admin Dashboard
@@ -102,12 +102,12 @@ const Sidebar = ({children}) => {
           </p>
           </NavLink>
           <div className="dropdown  m-0 p-5 text-white">
-            <label tabindex="0" className=" m-1">
+            <label tabIndex="0" className=" m-1">
               <AiOutlineSetting className="text-white inline-block relative bottom-[2px] mr-1" />
               Settings
             </label>
             <ul
-              tabindex="0"
+              tabIndex="0"
               className="dropdown-content menu p-2 shadow bg-gray-500 rounded-box w-52"
             >
               <li>

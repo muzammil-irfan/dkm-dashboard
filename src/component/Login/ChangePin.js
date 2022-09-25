@@ -1,7 +1,11 @@
 import React from "react";
 import loginIllustration from "../../asset/WhatsApp Image 2022-08-24 at 3.54.08 PM.jpeg";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import backendHost from "../../utils/backendHost";
+import { toast } from "react-toastify";
+import CommonToast, { errorHandler } from "../common/CommonToast";
+
 
 const ChangePin = () => {
   const {
@@ -11,18 +15,27 @@ const ChangePin = () => {
     reset,
   } = useForm();
 
-//   const [
-//     signInWithEmailAndPin,
-//   ] = useSignInWithEmailAndPin(auth);
 
   const onSubmit = async (data) => {
-    console.log(data);
-    // await signInWithEmailAndPin(data.oldPin, data.newPin);
-    reset();
+    const userEmail = sessionStorage.getItem("user");
+    const obj = {
+      email:userEmail,
+      oldPin:Number(data.oldPin),
+      newPin:Number(data.newPin)
+    };
+    axios.post(`${backendHost}/admin/updatepin`,obj)
+    .then(res=>{
+      reset();
+      toast.success(res.data.message);
+    })
+    .catch(err=>{
+      errorHandler(err);
+    })
   };
 
   return (
     <div className=" py-32 p-20">
+      <CommonToast />
       <div className=" shadow-md rounded-xl relative z-10">
         <div className="bg-white px-10 mx-20 grid grid-cols-2 Z-50 rounded-3xl">
           <div className="p-20 flex items-center">
@@ -34,52 +47,52 @@ const ChangePin = () => {
               <input
                 type="oldPin"
                 placeholder="Old Pin"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
-                {...register("Pin", {
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
+                {...register("oldPin", {
                   required: {
                     value: true,
                     message: "Pin is required",
                   },
                   minLength: {
-                    value: /^(\d{4}|\d{6})$/,
-                    message: "Minimum 6 characters required",
+                    value: 4,
+                    message: "Minimum 4 characters required",
                   },
                 })}
               />
               <label className="label">
-                {errors.email?.type === "required" && (
+                {errors.oldPin && (
                   <span className="label-text-alt text-red-500">
-                    {errors.email.message}
-                  </span>
-                )}
-                {errors.email?.type === "pattern" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.email.message}
+                    {errors.oldPin.message}
                   </span>
                 )}
               </label>
               <input
                 type="newPin"
                 placeholder="New Pin"
-                class="input input-bordered w-96 bg-white my-5 rounded-full"
-                {...register("Pin", {
+                className="input input-bordered w-96 bg-white my-5 rounded-full"
+                {...register("newPin", {
                   required: {
                     value: true,
                     message: "Pin is required",
                   },
                   minLength: {
-                    value: /^(\d{4}|\d{6})$/,
-                    message: "Minimum 6 characters required",
+                    value: 4,
+                    message: "Minimum 4 characters required",
                   },
                 })}
               />
-              <Link to="/dashboard">
+              <label className="label">
+                {errors.newPin && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.newPin.message}
+                  </span>
+                )}
+              </label>
               <input
                 type="submit"
                 value="Sign in"
                 className="btn text-white w-96 mt-10 rounded-full"
               />
-              </Link>
             </form>
           </div>
         </div>

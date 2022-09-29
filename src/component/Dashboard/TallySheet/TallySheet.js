@@ -9,20 +9,20 @@ const TallySheet = () => {
       </div>
       <div className="flex my-10 mx-5">
         <label
-          for="my-modal-4"
-          class="p-5 px-14 rounded-md text-center shadow-md mr-8"
+          htmlFor="my-modal-4"
+          className="p-5 px-14 rounded-md text-center shadow-md mr-8"
         >
           <p>Ticket Number</p>
           <h1 className="text-3xl text-black cursor-pointer font-bold">60</h1>
         </label>
-        <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-        <label for="my-modal-4" class="modal cursor-pointer">
-          <div class="modal-box relative p-10 flex items-center flex-col py-20" for="">
-            <h3 class="text-3xl font-bold">Change Ticket Number</h3>
+        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+        <label htmlFor="my-modal-4" className="modal cursor-pointer">
+          <div className="modal-box relative p-10 flex items-center flex-col py-20" htmlFor="">
+            <h3 className="text-3xl font-bold">Change Ticket Number</h3>
             <input
               type="ticket-number"
               placeholder="Ticket Number"
-              class="input input-bordered w-96 bg-white mt-5 rounded-full"
+              className="input input-bordered w-96 bg-white mt-5 rounded-full"
             />
             <input
               type="submit"
@@ -32,20 +32,20 @@ const TallySheet = () => {
           </div>
         </label>
         <label
-          for="my-modal-5"
-          class="p-5 px-14 rounded-md cursor-pointer text-center shadow-md"
+          htmlFor="my-modal-5"
+          className="p-5 px-14 rounded-md cursor-pointer text-center shadow-md"
         >
           <p>DKM Number</p>
           <h1 className="text-3xl text-black font-bold">60</h1>
         </label>
-        <input type="checkbox" id="my-modal-5" class="modal-toggle" />
-        <label for="my-modal-5" class="modal cursor-pointer ">
-          <div class="modal-box relative flex flex-col justify-center items-center py-20">
-            <h3 class="text-3xl font-bold">Change DKM Number</h3>
+        <input type="checkbox" id="my-modal-5" className="modal-toggle" />
+        <label htmlFor="my-modal-5" className="modal cursor-pointer ">
+          <div className="modal-box relative flex flex-col justify-center items-center py-20">
+            <h3 className="text-3xl font-bold">Change DKM Number</h3>
             <input
               type="email"
               placeholder="DKM Number"
-              class="input input-bordered w-96 bg-white mt-5 rounded-full"
+              className="input input-bordered w-96 bg-white mt-5 rounded-full"
             />
             <input
               type="submit"
@@ -56,7 +56,7 @@ const TallySheet = () => {
         </label>
       </div>
       <div className=" px-5 py-10  shadow-lg bg-slate-50">
-        <div class=" tallyGrid text-[10px]">
+        <div className=" tallyGrid text-[10px]">
           <div>
             <p className="">Date</p>
             <p className="">6/5/2022</p>

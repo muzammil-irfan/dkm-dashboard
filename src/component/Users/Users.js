@@ -7,9 +7,6 @@ import User from "./User";
 const Users = () => {
   const [user, setUser] = useState([]);
   useEffect(() => {
-    // fetch("https://dashboard-f.herokuapp.com/user")
-    //   .then((res) => res.json())
-    //   .then((data) => setUser(data));
     axios.get(`${backendHost}/user/ticket/`)
     .then(res=>{
       setUser(res.data);
@@ -25,8 +22,8 @@ const Users = () => {
         <h1 className="text-xl text-black font-bold">User</h1>
       </div>
       <div className="my-10 rounded-lg shadow-md h-96">
-        <div class="overflow-x-auto ">
-          <table class="table w-full ">
+        <div className="overflow-x-auto ">
+          <table className="table w-full ">
             <tbody>
               {/* <!-- row 1 --> */}
               <tr>
@@ -38,7 +35,7 @@ const Users = () => {
               {/* <!-- row 2 --> */}
               
                 
-                  {user.length !== 0 && user.map((item) => <User user={item} key={item.name} />
+                  {user.length !== 0 && user.map((item) => <User user={item} key={item.email} />
                     )}
             </tbody>
           </table>

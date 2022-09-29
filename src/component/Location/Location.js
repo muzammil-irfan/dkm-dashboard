@@ -20,16 +20,16 @@ const Location = () => {
     <div>
       <div className="flex justify-between items-center">
         <h1 className="text-xl text-black font-bold">Locations</h1>
-        <label for="my-modal-6" class="btn modal-button btn-warning">
+        <label for="my-modal-6" className="btn modal-button btn-warning">
           Add New
         </label>
         {/* modal  */}
-        <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-        <div class="modal ">
-          <div class="modal-box relative p-10 flex-col">
+        <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+        <div className="modal ">
+          <div className="modal-box relative p-10 flex-col">
             <label
               for="my-modal-6"
-              class="btn btn-sm btn-circle absolute right-2 top-2 "
+              className="btn btn-sm btn-circle absolute right-2 top-2 "
             >
               ✕
             </label>
@@ -38,12 +38,12 @@ const Location = () => {
               <input
                 type="email"
                 placeholder="Name"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
               />
               <input
                 type="email"
                 placeholder="Address"
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
               />
               <input
                 type="submit"
@@ -55,8 +55,8 @@ const Location = () => {
         </div>
       </div>
       <div className="my-10 rounded-lg shadow-md h-96">
-        <div class="overflow-x-auto ">
-          <table class="table w-full ">
+        <div className="overflow-x-auto ">
+          <table className="table w-full ">
             <tbody>
               {/* <!-- row 1 --> */}
               <tr>
@@ -70,10 +70,10 @@ const Location = () => {
                   <tr key={item.id}>
                     <td className="text-gray-400">{item.name}</td>
                     <td className="flex">
-                      <button class="btn btn-ghost btn-outline mx-2">
+                      <button className="btn btn-ghost btn-outline mx-2">
                         <FiEdit />
                       </button>
-                      <button class="btn bg-red-500">
+                      <button className="btn bg-red-500">
                         <RiDeleteBinLine />
                       </button>
                     </td>

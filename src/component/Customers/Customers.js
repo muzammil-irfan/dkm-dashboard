@@ -13,6 +13,7 @@ const Customers = () => {
     address:""
   }
   const [values,setValues] = useState(initialValues)
+  const [modal,setModal] = useState(false)//If true then open the modal
   const handleChange = (e)=>{
     const {name,value} = e.target;
     setValues({...values, [name]:value});
@@ -20,33 +21,40 @@ const Customers = () => {
   const [type,setType] = useState("create");
   const [id,setId] = useState("");
   const handleSubmit = ()=>{
-    //It will change the endpoint depending on the type so we can create and edit from same model without link method
-    if(type === 'update'){
-      
-      axios.put(`${backendHost}/customer/edit/${id}`,values)
-      .then(res=>{
-        dataFetcher();
-        toast.success(res.data.message);
-      })
-      .catch(err=>{
-      errorHandler(err);
-    });
-  } else {
-    axios.post(`${backendHost}/customer/add`,values)
-    .then(res=>{
-      dataFetcher();
-      toast.success(res.data.message);
-      })
-      .catch(err=>{
+    if(values.name.length === 0 || values.address.length === 0){
+      toast.error("Fill the form correctly")
+    } else {
+      //It will change the endpoint depending on the type so we can create and edit from same model without link method
+      if(type === 'update'){
+        
+        axios.put(`${backendHost}/customer/edit/${id}`,values)
+        .then(res=>{
+          dataFetcher();
+          toast.success(res.data.message);
+        })
+        .catch(err=>{
         errorHandler(err);
       });
+    } else {
+      
+      axios.post(`${backendHost}/customer/add`,values)
+      .then(res=>{
+        dataFetcher();
+        setModal(false);
+        console.log("off")
+        toast.success(res.data.message);
+        })
+        .catch(err=>{
+          errorHandler(err);
+        });
+      }
     }
-
   }
   const handleButton = (item, buttonType) =>{
     if(buttonType === 'edit'){
       setId(item.id);
       setType("update");
+      setModal(true)
     } else {
       axios.delete(`${backendHost}/customer/delete/${item.id}`)
       .then(res=>{
@@ -70,18 +78,20 @@ const Customers = () => {
   useEffect(() => {
     dataFetcher();
   }, []);
+  // ${modal ? "visible opacity-100 pointer-events-auto	":"invisible opacity-0 pointer-events-none"}
   return (
     <div>
       <div className="flex justify-between items-center">
         <h1 className="text-xl text-black font-bold">Customers</h1>
-        <label htmlFor="my-modal-3" className="btn modal-button btn-warning">Add New</label>
+        <label onClick={()=>{setModal(true); setType("create");}} className="btn modal-button btn-warning">Add New</label>
         {/* modal  */}
-        <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-        <div className="modal ">
+        <input type="checkbox" onChange={()=>{console.log("change")}} id="my-modal-3" checked={modal} className="modal-toggle" />
+        <div className={`modal `}>
           <div className="modal-box relative p-10 flex-col">
             <label
-              htmlFor="my-modal-3"
+              
               className="btn btn-sm btn-circle absolute right-2 top-2 "
+              onClick={()=>{setModal(false)}}
             >
               ✕
             </label>

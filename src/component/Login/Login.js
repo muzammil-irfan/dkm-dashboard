@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import bgImg from "../../asset/Union 76.png";
 import loginIllustration from "../../asset/WhatsApp Image 2022-08-24 at 3.54.08 PM.jpeg";
 // import { useForm } from "react-hook-form";
-import auth from "../../Firebase/firebase.init";
+// import auth from "../../Firebase/firebase.init";
 import {  useNavigate } from 'react-router-dom';
-import useToken from "../../Hooks/useToken"
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+// import useToken from "../../Hooks/useToken"
+// import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import axios from "axios";
 import backendHost from "../../utils/backendHost";
+import { toast  } from "react-toastify";
+import CommonToast,{ errorHandler } from "../common/CommonToast";
+
 
 const Login = () => {
   const initialValues = {
@@ -16,44 +19,38 @@ const Login = () => {
     pin:""
   }
   const [ values, setValues ] = useState(initialValues);
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth);
   
   
 
     const navigate = useNavigate();
-    const [token] = useToken(user)
 
-    console.log(error);
 
-    if ( user) {
-      navigate("/dashboard/mainDashboard")
-  }
+   
   const handleChange = (e)=>{
     const {name,value} = e.target;
-    setValues({...values,[name]: value});
+    setValues({...values, [name]: value});
   }
   const handleSubmit=(e)=>{
     e.preventDefault()
-    console.log(values);
     if(typeof values.pin !== 'number'){
       setValues({...values,pin:Number(values.pin)})
     }
+    console.log(values);
+    
     axios.post(`${backendHost}/admin/login`,values)
     .then(res=>{
-      console.log(res.data.message);
+      toast(res.data.message);
       sessionStorage.setItem("user",values.email);
-      navigate("/dashboard/mainDashboard");
+      navigate("/");
     })  
     .catch(err=>{
+      errorHandler(err);
       console.log(err);
     });
   }
   return (
     <div className="bg-yellow-400 py-32 p-20">
+      <CommonToast />
       <div className="relative z-10">
         <img
           src={bgImg}
@@ -75,7 +72,7 @@ const Login = () => {
                 name="email"
                 value={values.email}
                 onChange={handleChange}
-                class="input input-bordered w-96 bg-white mt-5 rounded-full"
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
               />
               <input
                 placeholder="Password"
@@ -83,15 +80,16 @@ const Login = () => {
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                class="input input-bordered w-96 bg-white my-5 rounded-full"
+                className="input input-bordered w-96 bg-white my-5 rounded-full"
               />
               <input
-                type="Pin"
+                type="number"
                 placeholder="Pin"
                 name="pin"
+
                 value={values.pin}
                 onChange={handleChange}
-                class="input input-bordered w-96 bg-white my-5 rounded-full"
+                className="input input-bordered w-96 bg-white my-5 rounded-full"
               />
               {/* <Link to="/dashboard"> */}
                 <input

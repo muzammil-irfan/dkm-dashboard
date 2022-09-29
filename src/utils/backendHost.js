@@ -1,3 +1,3 @@
-const backendHost = "http://35.172.118.133:8080"
+const backendHost = "https://usedkmpipe.app"
 
 export default backendHost;

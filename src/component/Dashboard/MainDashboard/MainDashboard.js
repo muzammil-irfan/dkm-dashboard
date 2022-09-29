@@ -38,14 +38,14 @@ const MainDashboard = () => {
         <input
           type="text"
           placeholder="Start Location"
-          class="input input-bordered w-40 mx-5 bg-slate-50"
+          className="input input-bordered w-40 mx-5 bg-slate-50"
         />
         <input
           type="text"
           placeholder="End Location"
-          class="input input-bordered w-40 mx-5 bg-slate-50"
+          className="input input-bordered w-40 mx-5 bg-slate-50"
         />
-        <button class="btn btn-warning">Search</button>
+        <button className="btn btn-warning">Search</button>
         </div>
         </div>
         <div className="my-10">
@@ -60,14 +60,14 @@ const MainDashboard = () => {
         <input
           type="text"
           placeholder="Start Location"
-          class="input input-bordered w-40 mx-5 bg-slate-50"
+          className="input input-bordered w-40 mx-5 bg-slate-50"
         />
         <input
           type="text"
           placeholder="End Location"
-          class="input input-bordered w-40 mx-5 bg-slate-50"
+          className="input input-bordered w-40 mx-5 bg-slate-50"
         />
-        <button class="btn btn-warning">Search</button>
+        <button className="btn btn-warning">Search</button>
         </div>
         </div>
         <div className="my-10">

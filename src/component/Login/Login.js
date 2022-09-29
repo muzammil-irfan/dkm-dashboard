@@ -31,16 +31,18 @@ const Login = () => {
     setValues({...values, [name]: value});
   }
   const handleSubmit=(e)=>{
-    e.preventDefault()
-    if(typeof values.pin !== 'number'){
-      setValues({...values,pin:Number(values.pin)})
-    }
-    console.log(values);
+    e.preventDefault();
     
-    axios.post(`${backendHost}/admin/login`,values)
+    const obj = {
+      email:values.email,
+      password:values.password,
+      pin:Number(values.pin)
+    };
+
+    axios.post(`${backendHost}/admin/login`,obj)
     .then(res=>{
       toast(res.data.message);
-      sessionStorage.setItem("user",values.email);
+      sessionStorage.setItem("user",obj.email);
       navigate("/");
     })  
     .catch(err=>{

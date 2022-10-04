@@ -1,3 +1,3 @@
-const backendHost = "https://usedkmpipe.app"
+const backendHost = "https://usedkmpipe.app/api";
 
 export default backendHost;

@@ -1,5 +1,0 @@
-.tallyGrid{
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-    /* grid-gap:10px */
-}

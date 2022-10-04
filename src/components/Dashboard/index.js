@@ -21,37 +21,7 @@ const Dashboard = () => {
     axios
       .get(`${backendHost}/customer_order/`)
       .then((res) => {
-        const data = [
-          {
-            customer_name: "Yard 1",
-            total: 10,
-          },
-          {
-            customer_name: "Yard 2",
-            total: 20,
-          },
-          {
-            customer_name: "Yard 3",
-            total: 30,
-          },
-          {
-            customer_name: "Yard 4",
-            total: 40,
-          },
-          {
-            customer_name: "Yard 5",
-            total: 50,
-          },
-          {
-            customer_name: "Yard 6",
-            total: 60,
-          },
-          {
-            customer_name: "Yard 7",
-            total: 70,
-          },
-        ];
-        setCustomerTotal(data);
+        setCustomerTotal(res.data);
       })
       .catch((err) => {
         console.log(err);

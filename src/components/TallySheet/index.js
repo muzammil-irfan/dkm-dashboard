@@ -74,7 +74,7 @@ const TallySheet = () => {
           <tbody>
             {ticketData.map((item) => {
               return (
-                <tr key={item.ticket_number}>
+                <tr key={item.ticket_number} >
                   <td className="py-1">{item.date}</td>
                   <td>
                     <a
@@ -96,7 +96,7 @@ const TallySheet = () => {
                       onClick={() => {
                         handleImageModal(item.truck_image);
                       }}
-                      className="underline text-{unset} text-blue-500"
+                      className="underline text-{unset} text-blue-500 pointer-events-auto"
                     >
                       {item.truck_number}
                     </a>
@@ -106,7 +106,7 @@ const TallySheet = () => {
                       onClick={() => {
                         handleImageModal(item.trailer_image);
                       }}
-                      className="underline text-{unset} text-blue-500"
+                      className="underline text-{unset} text-blue-500 pointer-events-auto"
                     >
                       {item.trailer_number}
                     </a>

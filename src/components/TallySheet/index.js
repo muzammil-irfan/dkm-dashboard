@@ -4,83 +4,118 @@ import backendHost from "../../utils/backendHost";
 import CommonToast from "../common/CommonToast";
 import ChangeDKM from "./ChangeDKM";
 import ChangeTicket from "./ChangeTicket";
+import ImageModal from "./ImageModal";
 
 const TallySheet = () => {
-  const [dkmTicket,setDkmTicket] = useState({dkm:"",ticket:""});
-  const [ticketData,setTicketData] = useState([]);
-  const dkmTicketFetcher = ()=>{
-    axios.get(`${backendHost}/dkm_ticket`)
-    .then(res=>{
-      console.log(res)
-      setDkmTicket({
-        dkm: res.data.dkm,
-        ticket:res.data.ticket
+  const [dkmTicket, setDkmTicket] = useState({ dkm: "", ticket: "" });
+  const [ticketData, setTicketData] = useState([]);
+  const [modal,setModal ] = useState(false);
+  const [image,setImage] = useState("");
+  const dkmTicketFetcher = () => {
+    axios
+      .get(`${backendHost}/dkm_ticket`)
+      .then((res) => {
+        setDkmTicket({
+          dkm: res.data.dkm,
+          ticket: res.data.ticket,
+        });
       })
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  }
-  const ticketsFetcher = ()=>{
-    axios.get(`${backendHost}/ticket/`)
-    .then(res=>{
-      setTicketData(res.data);
-      console.log(ticketData)
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  } 
-  useEffect(()=>{
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const ticketsFetcher = () => {
+    axios
+      .get(`${backendHost}/ticket/`)
+      .then((res) => {
+        setTicketData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
     dkmTicketFetcher();
     ticketsFetcher();
-  },[])
+  }, []);
+
+  const handleImageModal = (imageSrc) => {
+    setModal(true);
+    setImage(imageSrc);
+  };
+
   return (
     <div>
       <CommonToast />
+      <ImageModal modal={modal} setModal={setModal} imageSrc={image} />
       <div>
         <h1 className="text-xl font-bold text-black">Tally Sheet</h1>
       </div>
       <div className="flex my-10 mx-5">
-        <ChangeTicket ticket={dkmTicket.ticket} dkmTicketFetcher={dkmTicketFetcher} />
+        <ChangeTicket
+          ticket={dkmTicket.ticket}
+          dkmTicketFetcher={dkmTicketFetcher}
+        />
         <ChangeDKM dkm={dkmTicket.dkm} dkmTicketFetcher={dkmTicketFetcher} />
       </div>
       <div className="w-fit py-10 shadow-lg bg-slate-50 ">
         <table className="overflow-auto">
           <thead>
             <tr>
-              {
-                headerData.map(item=>{
-                  return(
-                    <td key={item} >
-                      <p className="px-1 w-28">{item} </p></td>
-                  )
-                })
-              }
+              {headerData.map((item) => {
+                return (
+                  <td key={item}>
+                    <p className=" w-28 font-semibold">{item} </p>
+                  </td>
+                );
+              })}
             </tr>
           </thead>
           <tbody>
-            {
-              ticketData.map(item=>{
-                return(
-                  <tr  key={item.ticket_number}>
-                    <td className="py-1">{item.date}</td>
-                    <td>{item.ticket_number}</td>
-                    <td>{item.dkm_number}</td>
-                    <td>{item.location.name}</td>
-                    <td>{item.customer.name}</td>
-                    <td>{item.customer_po}</td>
-                    <td>{item.pipe_size}</td>
-                    <td>{item.total_ft}</td>
-                    <td>No status</td>
-                    <td>{item.truck_number}</td>
-                    <td>{item.trailer_number}</td>
-                    <td>{item.trailer_number}</td>
-                    <td>{item.truck_company}</td>
-                  </tr>
-                )
-              })
-            }
+            {ticketData.map((item) => {
+              return (
+                <tr key={item.ticket_number}>
+                  <td className="py-1">{item.date}</td>
+                  <td>
+                    <a
+                      href={item.upload_pdf}
+                      className="underline text-{unset} text-blue-500"
+                    >
+                      {item.ticket_number}
+                    </a>
+                  </td>
+                  <td>{item.dkm_number}</td>
+                  <td>{item.location.name}</td>
+                  <td>{item.customer.name}</td>
+                  <td>{item.customer_po}</td>
+                  <td>{item.pipe_size}</td>
+                  <td>{item.total_ft}</td>
+                  <td>No status</td>
+                  <td>
+                    <a
+                      onClick={() => {
+                        handleImageModal(item.truck_image);
+                      }}
+                      className="underline text-{unset} text-blue-500"
+                    >
+                      {item.truck_number}
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      onClick={() => {
+                        handleImageModal(item.trailer_image);
+                      }}
+                      className="underline text-{unset} text-blue-500"
+                    >
+                      {item.trailer_number}
+                    </a>
+                  </td>
+                  <td>No driver</td>
+                  <td>{item.truck_company}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -104,5 +139,5 @@ const headerData = [
   "Truck Num",
   "Trailer Num",
   "Driver",
-  "Truck com"
-]
+  "Truck com",
+];

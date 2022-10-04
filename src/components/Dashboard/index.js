@@ -1,79 +1,77 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import backendHost from "../../utils/backendHost";
-import Chart from "./LocationChart"
-import Chart2 from "./CustomerChart"
+import LocationChart from "./LocationChart";
+import CommonToast from "../common/CommonToast";
+import CustomerChart from "./CustomerChart";
 
 const Dashboard = () => {
-  const [locationTotal,setLocationTotal] = useState([]);
-  const [customerTotal,setCustomerTotal] = useState([]);
+  const [locationTotal, setLocationTotal] = useState([]);
+  const [customerTotal, setCustomerTotal] = useState([]);
+
   useEffect(() => {
-    axios.get(`${backendHost}/total_ft/`)
-    .then(res=>{
-      setLocationTotal(res.data);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-    axios.get(`${backendHost}/customer_order/`)
-    .then(res=>{
-      setCustomerTotal(res.data);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  }, [])
-  
+    axios
+      .get(`${backendHost}/total_ft/`)
+      .then((res) => {
+        setLocationTotal(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get(`${backendHost}/customer_order/`)
+      .then((res) => {
+        const data = [
+          {
+            customer_name: "Yard 1",
+            total: 10,
+          },
+          {
+            customer_name: "Yard 2",
+            total: 20,
+          },
+          {
+            customer_name: "Yard 3",
+            total: 30,
+          },
+          {
+            customer_name: "Yard 4",
+            total: 40,
+          },
+          {
+            customer_name: "Yard 5",
+            total: 50,
+          },
+          {
+            customer_name: "Yard 6",
+            total: 60,
+          },
+          {
+            customer_name: "Yard 7",
+            total: 70,
+          },
+        ];
+        setCustomerTotal(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="flex flex-col justify-start">
+      <CommonToast />
       <div className="">
         <h1 className="text-xl text-black font-bold">Main Dashboard</h1>
-        <p>Welcome Admin, everything back’s great.</p>
+        <p>Welcome Admin, everything back&apos;s great.</p>
       </div>
       {/* FT x Location chart  */}
-      <div className="bg-gray-200 my-16 p-5  shadow-md rounded-md">
-        <div className="flex justify-between">
-        <h1 className="text-xl text-black font-bold">Total FT x Location</h1>
-        <div>
-        <input
-          type="text"
-          placeholder="Start Location"
-          className="input input-bordered w-40 mx-5 bg-slate-50"
-        />
-        <input
-          type="text"
-          placeholder="End Location"
-          className="input input-bordered w-40 mx-5 bg-slate-50"
-        />
-        <button className="btn btn-warning">Search</button>
-        </div>
-        </div>
-        <div className="my-10">
-        <Chart data={locationTotal} />
-        </div>
-      </div>
+
+      <LocationChart data={locationTotal} />
+
       {/* Customers x Orders chart  */}
-      <div className="bg-gray-200 p-5  shadow-md rounded-md">
-        <div className="flex justify-between">
-        <h1 className="text-xl text-black font-bold">Customers x Orders</h1>
-        <div>
-        <input
-          type="text"
-          placeholder="Start Location"
-          className="input input-bordered w-40 mx-5 bg-slate-50"
-        />
-        <input
-          type="text"
-          placeholder="End Location"
-          className="input input-bordered w-40 mx-5 bg-slate-50"
-        />
-        <button className="btn btn-warning">Search</button>
-        </div>
-        </div>
-        <div className="my-10">
-        <Chart2 data={customerTotal}/>
-        </div>
-      </div>
+
+      <CustomerChart data={customerTotal} />
     </div>
   );
 };

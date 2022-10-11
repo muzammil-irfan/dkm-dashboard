@@ -6,6 +6,7 @@ import axios from "axios";
 import backendHost from "../../utils/backendHost";
 import { toast } from 'react-toastify';
 import CommonToast,{errorHandler} from "../common/CommonToast";
+import { Navigate } from "react-router-dom";
 
 const ChangePassword = () => {
   const {
@@ -15,9 +16,8 @@ const ChangePassword = () => {
     reset,
     watch
   } = useForm();
-
   const onSubmit = (data) => {
-    const userEmail = sessionStorage.getItem("user");
+    const userEmail = localStorage.getItem("user");
     if(userEmail){
       const obj = {
         email:userEmail,
@@ -33,8 +33,10 @@ const ChangePassword = () => {
         console.log(err)
         errorHandler(err);
       })
+    } else {
+      toast.error("You are not logged in");
     }
-  };  
+  }  
   return (
     <div className=" py-32 p-20">
       <CommonToast />

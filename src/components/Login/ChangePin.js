@@ -17,7 +17,7 @@ const ChangePin = () => {
 
 
   const onSubmit = async (data) => {
-    const userEmail = sessionStorage.getItem("user");
+    const userEmail = localStorage.getItem("user");
     const obj = {
       email:userEmail,
       oldPin:Number(data.oldPin),

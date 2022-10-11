@@ -47,7 +47,7 @@ const ChangePassword = () => {
             <h1 className="text-2xl font-bold	text-black ">Change Password:</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
-                type="Old-Password"
+                type="password"
                 placeholder="Old Password"
                 className="input input-bordered w-96 bg-white mt-5 rounded-full"
                 {...register("oldPassword", {
@@ -69,7 +69,7 @@ const ChangePassword = () => {
                 )}
               </label>
               <input
-                type="New-Password"
+                type="password"
                 placeholder="New Password"
                 className="input input-bordered w-96 bg-white mt-5 rounded-full"
                 {...register("newPassword", {
@@ -91,7 +91,7 @@ const ChangePassword = () => {
                 )}
               </label>
               <input
-                type="Confirm-Password"
+                type="password"
                 placeholder="Confirm Password"
                 className="input input-bordered w-96 bg-white mt-5 rounded-full"
                 {...register("newPassword2", {

@@ -1,31 +1,44 @@
-import React, {useEffect} from "react";
+import React, {useState,useEffect} from "react";
 import { FaChartPie } from "react-icons/fa";
 import { BsClipboardCheck } from "react-icons/bs";
 import { HiUserGroup, HiUsers } from "react-icons/hi";
 import { GoLocation } from "react-icons/go";
-import { AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineSetting,AiOutlineLogout } from "react-icons/ai";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Sidebar = ({children}) => {
+  const [display,setDisplay] = useState(false);
   const navigate = useNavigate();
   const pN = window.location.pathname;
   useEffect(() => {
-    const user = sessionStorage.getItem("user");
+    const user = localStorage.getItem("user");
     if(!user){
+      setDisplay(false)
       navigate('/login');
-    };
+    } else {
+      setDisplay(true);
+    }
   }, [pN]);
 
   if(pN.includes('login')){
     return children;
   };
+  const handleLogout = ()=>{
+    localStorage.removeItem("user");
+    navigate("/login");
+  }
+  if(!display){
+    return(
+      <div> </div>
+    )
+  }
   return (
     <div className={`drawer drawer-mobile `} >
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col p-5 bg-white">
         {/* <Outlet />
          */}
-        {children}
+         {children}
         <label
           htmlFor="my-drawer-2"
           className="btn btn-primary drawer-button lg:hidden"
@@ -118,6 +131,10 @@ const Sidebar = ({children}) => {
               </li>
             </ul>
           </div>
+          <p className=" m-0 p-5 text-white border-1 pointer-events-auto"  onClick={handleLogout}>
+            <AiOutlineLogout className="text-white inline-block relative bottom-[2px] mr-1" />
+             Logout 
+          </p>
         </ul>
       </div>
     </div>

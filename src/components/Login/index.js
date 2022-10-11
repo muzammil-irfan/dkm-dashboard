@@ -12,9 +12,10 @@ const Login = () => {
     email: "",
     password: "",
     pin: "",
+    code:""
   };
   const [values, setValues] = useState(initialValues);
-
+  const [loginForm,setLoginForm] = useState(true)// If true then show login form otherwise show verification code screen
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,24 +24,39 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const obj = {
-      email: values.email,
-      password: values.password,
-      pin: Number(values.pin),
-    };
-
-    axios
-      .post(`${backendHost}/admin/login`, obj)
-      .then((res) => {
-        toast(res.data.message);
-        sessionStorage.setItem("user", obj.email);
+    if(loginForm){
+      const loginObj = {
+        email: values.email,
+        password: values.password,
+        pin: Number(values.pin),
+      };
+  
+      axios
+        .post(`${backendHost}/admin/login`, loginObj)
+        .then((res) => {
+          toast.success("Please verify code to login");
+          setLoginForm(false);
+        })
+        .catch((err) => {
+          errorHandler(err);
+          console.log(err);
+        }); 
+    } else {
+      const codeObj = {
+        email: values.email,
+        code: values.code//code will be string
+      };
+      axios.post(`${backendHost}/admin/login/verify`,codeObj)
+      .then(res=>{
+        toast.success("Login Successfully");
+        localStorage.setItem("user",values.email);
         navigate("/");
       })
-      .catch((err) => {
+      .catch(err=>{
         errorHandler(err);
-        console.log(err);
       });
+    };
+
   };
   return (
     <div className="bg-yellow-400 py-32 p-20">
@@ -57,8 +73,10 @@ const Login = () => {
             <img src={loginIllustration} alt="" />
           </div>
           <div className=" border-l-2 p-20 flex flex-col items-center">
-            <h1 className="text-2xl font-bold	text-black">Sign in</h1>
+            <h1 className="text-2xl font-bold	text-black">{loginForm ? "Sign in" : "Code verification"}</h1>
             <p>Login to your account</p>
+              {
+                loginForm ?
             <form onSubmit={handleSubmit}>
               <input
                 placeholder="Email"
@@ -66,7 +84,7 @@ const Login = () => {
                 name="email"
                 value={values.email}
                 onChange={handleChange}
-                className="input input-bordered w-96 bg-white mt-5 rounded-full"
+                className="input input-bordered w-96 bg-white my-5 rounded-full"
               />
               <input
                 placeholder="Password"
@@ -77,7 +95,7 @@ const Login = () => {
                 className="input input-bordered w-96 bg-white my-5 rounded-full"
               />
               <input
-                type="number"
+                type="password"
                 placeholder="Pin"
                 name="pin"
                 value={values.pin}
@@ -89,11 +107,28 @@ const Login = () => {
                 type="submit"
                 value="Sign in"
                 className="btn text-white w-full mt-10 rounded-full"
-              />
+                />
               {/* </Link> */}
+            </form> :
+            <form onSubmit={handleSubmit}>
+              <input
+                type="number"
+                placeholder="Enter verification code"
+                name="code"
+                value={values.code}
+                onChange={handleChange}
+                className="input input-bordered w-96 bg-white my-5 rounded-full"
+              />
+              {/* <Link to="/dashboard"> */}
+              <input
+                type="submit"
+                value="Veirfy code"
+                className="btn text-white w-full mt-10 rounded-full"
+                />
             </form>
+        }
           </div>
-        </div>
+          </div>
         <img
           src={bgImg}
           className="absolute bottom-[-115px] right-[-26px] z-[-10] w-[121px] h-[126px]"

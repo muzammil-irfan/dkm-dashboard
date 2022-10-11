@@ -45,7 +45,7 @@ const ChangePin = () => {
             <h1 className="text-2xl font-bold	text-black">Change Pin:</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
-                type="oldPin"
+                type="password"
                 placeholder="Old Pin"
                 className="input input-bordered w-96 bg-white mt-5 rounded-full"
                 {...register("oldPin", {
@@ -67,7 +67,7 @@ const ChangePin = () => {
                 )}
               </label>
               <input
-                type="newPin"
+                type="password"
                 placeholder="New Pin"
                 className="input input-bordered w-96 bg-white my-5 rounded-full"
                 {...register("newPin", {

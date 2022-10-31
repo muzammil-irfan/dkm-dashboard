@@ -99,7 +99,7 @@ const Location = () => {
             >
               ✕
             </label>
-            <h1 className="text-2xl font-bold ml-7">Add member</h1>
+            <h1 className="text-2xl font-bold ml-7">{type === "create" ? "Add" : "Edit"} Location</h1>
             <div className="flex justify-center items-center flex-col">
               <input
                 placeholder="Name"

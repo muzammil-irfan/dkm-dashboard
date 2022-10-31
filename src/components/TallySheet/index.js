@@ -9,8 +9,9 @@ import ImageModal from "./ImageModal";
 const TallySheet = () => {
   const [dkmTicket, setDkmTicket] = useState({ dkm: "", ticket: "" });
   const [ticketData, setTicketData] = useState([]);
-  const [modal,setModal ] = useState(false);
-  const [image,setImage] = useState("");
+  const [modal, setModal] = useState(false);
+  const [image, setImage] = useState("");
+
   const dkmTicketFetcher = () => {
     axios
       .get(`${backendHost}/dkm_ticket`)
@@ -40,14 +41,17 @@ const TallySheet = () => {
   }, []);
 
   const handleImageModal = (imageSrc) => {
-    setModal(true);
     setImage(imageSrc);
+    setModal(true);
   };
-
+  const handleClose = () => {
+    setModal(false);
+    setImage("");
+  };
   return (
     <div>
       <CommonToast />
-      <ImageModal modal={modal} setModal={setModal} imageSrc={image} />
+      <ImageModal modal={modal} imageSrc={image} handleClose={handleClose} />
       <div>
         <h1 className="text-xl font-bold text-black">Tally Sheet</h1>
       </div>
@@ -72,14 +76,17 @@ const TallySheet = () => {
             </tr>
           </thead>
           <tbody>
-            {ticketData.map((item) => {
+            {ticketData.map((item, index) => {
+              const pdfSplit = item.upload_pdf.split("/");
+              const pdfLink = "/tally-sheet/pdf/" + pdfSplit.slice(-1);
               return (
-                <tr key={item.ticket_number} >
+                <tr key={item.ticket_number + index}>
                   <td className="py-1">{item.date}</td>
                   <td>
                     <a
-                      href={item.upload_pdf}
+                      href={pdfLink}
                       className="underline text-{unset} text-blue-500"
+                      // onClick={()=>{handlePdf(item.upload_pdf)}}
                     >
                       {item.ticket_number}
                     </a>
@@ -96,7 +103,7 @@ const TallySheet = () => {
                       onClick={() => {
                         handleImageModal(item.truck_image);
                       }}
-                      className="underline text-{unset} text-blue-500 pointer-events-auto"
+                      className="underline text-{unset} text-blue-500 pointer"
                     >
                       {item.truck_number}
                     </a>
@@ -106,7 +113,7 @@ const TallySheet = () => {
                       onClick={() => {
                         handleImageModal(item.trailer_image);
                       }}
-                      className="underline text-{unset} text-blue-500 pointer-events-auto"
+                      className="underline text-{unset} text-blue-500 pointer"
                     >
                       {item.trailer_number}
                     </a>

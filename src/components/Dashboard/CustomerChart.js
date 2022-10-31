@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { toast } from "react-toastify";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
-export default function CustomerChart({ data }) {
+export default function CustomerChart({ data,handleFilter }) {
   const [values, setValues] = useState({ start: "", end: "", data: [] });
   useEffect(()=>{
     setValues({...values,data: data});
@@ -38,24 +38,8 @@ export default function CustomerChart({ data }) {
         <div className="flex justify-between">
           <h1 className="text-xl text-black font-bold">Customers x Orders</h1>
           <div>
-          <input
-              type="number"
-              placeholder="Start Customer No"
-              name="start"
-              value={values.start}
-              onChange={handleChange}
-              className="input input-bordered w-40 mx-5 bg-slate-50"
-            />
-            <input
-              type="number"
-              placeholder="End Customer No"
-              name="end"
-              value={values.end}
-              onChange={handleChange}
-              className="input input-bordered w-40 mx-5 bg-slate-50"
-            />
-            <button className="btn btn-warning" onClick={handleSearch}>
-              Search
+            <button className="btn btn-warning" onClick={handleFilter}>
+              Filter
             </button>
           </div>
         </div>

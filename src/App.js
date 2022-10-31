@@ -10,6 +10,8 @@ import Login from "./components/Login";
 import User from "./components/User";
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from "./components/common/Sidebar";
+import PdfViewer from "./components/TallySheet/PdfViewer";
+
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +25,7 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="location" element={<Location />} />
           <Route path="tally-sheet" element={<TallySheet />} /> 
+          <Route path="tally-sheet/pdf/:id" element={<PdfViewer />} /> 
         </Routes>
       </Sidebar>
     </BrowserRouter>

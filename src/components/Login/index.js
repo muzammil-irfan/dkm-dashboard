@@ -58,6 +58,19 @@ const Login = () => {
     };
 
   };
+  const handleResend = ()=>{
+    document.getElementById("resend").style = "cursor: not-allowed;"
+    const obj = {
+      email : values.email
+    }
+    axios.post(`${backendHost}/admin/login/resend`,obj)
+    .then(res=>{
+      toast.success("Email sended successfully")
+    })
+    .catch(err=>{
+      errorHandler(err);
+    })
+  }
   return (
     <div className="bg-yellow-400 py-32 p-20">
       <CommonToast />
@@ -117,8 +130,10 @@ const Login = () => {
                 name="code"
                 value={values.code}
                 onChange={handleChange}
-                className="input input-bordered w-96 bg-white my-5 rounded-full"
+                className="input input-bordered w-96 bg-white mt-5 rounded-full"
+                id="code"
               />
+              <p className="text-blue-500 font-semibold pl-1 my-2 " id="resend" style={{cursor:"pointer"}} onClick={handleResend} >Resend Code</p>
               {/* <Link to="/dashboard"> */}
               <input
                 type="submit"

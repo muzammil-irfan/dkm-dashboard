@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
-export default function LocationChart({ data }) {
+export default function LocationChart({ data,handleFilter }) {
   const [values, setValues] = useState({ start: "", end: "", data: [] });
   useEffect(()=>{
     setValues({...values,data: data});
@@ -39,24 +39,8 @@ export default function LocationChart({ data }) {
         <div className="flex justify-between">
           <h1 className="text-xl text-black font-bold">Total FT x Location</h1>
           <div>
-            <input
-              type="number"
-              placeholder="Start Location"
-              name="start"
-              value={values.start}
-              onChange={handleChange}
-              className="input input-bordered w-40 mx-5 bg-slate-50"
-            />
-            <input
-              type="number"
-              placeholder="End Location"
-              name="end"
-              value={values.end}
-              onChange={handleChange}
-              className="input input-bordered w-40 mx-5 bg-slate-50"
-            />
-            <button className="btn btn-warning" onClick={handleSearch}>
-              Search
+            <button className="btn btn-warning" onClick={handleFilter}>
+              Filter
             </button>
           </div>
         </div>

@@ -13,6 +13,7 @@ export default function CommonToast() {
     <ToastContainer 
     position='bottom-center'
     autoClose={3000}
+    hideProgressBar
     />
   )
 }

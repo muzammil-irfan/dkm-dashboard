@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
 
-export default function ImageModal({modal,setModal,imageSrc}) {
+export default function ImageModal({modal,handleClose,imageSrc}) {
   return (
     <div>
         <input type="checkbox" onChange={()=>{console.log("change")}} id="my-modal-3" checked={modal} className="modal-toggle" />
@@ -9,12 +9,12 @@ export default function ImageModal({modal,setModal,imageSrc}) {
             <label
               
               className="btn btn-sm btn-circle absolute right-2 top-2 "
-              onClick={()=>{setModal(false)}}
+              onClick={handleClose}
             >
               ✕
             </label>
            <div className='flex justify-center items-center flex-col'>
-           <img src={imageSrc} />
+           <img src={imageSrc} alt="" />
            </div>
           </div>
         </div>
